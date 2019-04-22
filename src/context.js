@@ -81,6 +81,17 @@ class ProductProvider extends Component {
         modalOpen:false 
       })
     }
+    increment=()=>{
+      console.log("count is increment")
+    }
+
+    decrement=()=>{
+      console.log("count is decremented")
+    }
+
+    clearCart=()=>{
+      console.log("cart is empty now")
+    }
    
   render() {
     return (
@@ -89,7 +100,11 @@ class ProductProvider extends Component {
        handleDetail:this.handleDetail,
        addToCart:this.addToCart,
        openModal:this.openModal,
-       closeModal:this.closeModal
+       closeModal:this.closeModal,
+       increment:this.increment,
+       decrement:this.decrement,
+       clearCart:this.clearCart,
+
        }}>
     
          {this.props.children}

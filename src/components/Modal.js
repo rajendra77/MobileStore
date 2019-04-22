@@ -13,9 +13,7 @@ export default class Modal extends Component {
 
               if(!modalOpen){
                   return (
-                      <div>
-                          Hello 
-                      </div>
+                    null
                   )
               }
               else{

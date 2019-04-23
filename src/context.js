@@ -14,12 +14,14 @@ class ProductProvider extends Component {
             details:detailProduct,
             cart:[],
             modalOpen:false,
-            modalProduct:detailProduct
+            modalProduct:detailProduct,
+            subTotal:0
         }
     }
     componentDidMount(){
        this.setProduct()
     }
+    
     setProduct =()=>{
       let tempProducts=[]
       storeProducts.forEach(item=>{
@@ -56,13 +58,12 @@ class ProductProvider extends Component {
       product.count=1
       const price=product.price
       product.total=price
+     
       this.setState(()=>{
         return{
           product:tempProducts,
           cart:[...this.state.cart,product]
         }
-      },()=>{
-        console.log(this.state.cart,this.state.products)
       })
     }
 
@@ -71,8 +72,6 @@ class ProductProvider extends Component {
       this.setState({
         modalOpen:true,
         modalProduct:product
-      },()=>{
-        console.log(this.state.openModal,this.state.modalProduct)
       })
     }
 
@@ -81,8 +80,17 @@ class ProductProvider extends Component {
         modalOpen:false 
       })
     }
-    increment=()=>{
-      console.log("count is increment")
+    increment=(id)=>{   
+      const cart=this.state.cart.map((item)=>{
+          if(item.id===id)
+          {
+            item.count++        
+          }
+          
+      })
+      this.setState({
+          cart:cart
+      })
     }
 
     decrement=()=>{
@@ -90,9 +98,15 @@ class ProductProvider extends Component {
     }
 
     clearCart=()=>{
-      console.log("cart is empty now")
+     this.setProduct()
+    
+      this.setState({
+        cart:[]
+      })
     }
-   
+     
+  
+
   render() {
     return (
      <ProductContext.Provider value={{
